@@ -3,7 +3,7 @@ import React from 'react';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 import classes from './Burger.module.css';
 
-const Burger = (props) => {
+const Burger = ( props ) => {
 
     // console.log(Object.keys(props.ingredients));
     // console.log(props.ingredients);
