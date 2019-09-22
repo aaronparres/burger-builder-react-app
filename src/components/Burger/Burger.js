@@ -10,16 +10,18 @@ const Burger = (props) => {
     // console.log(props.ingredients["meat"]);
     // console.log([...Array(props.ingredients["meat"])]); // returns an array with two fields undefined
 
-    const transformIngredients = Object.keys(props.ingredients).map(ingType => {
+    const transformedIngredients = Object.keys(props.ingredients).map(ingType => {
         return [...Array(props.ingredients[ingType])].map((_, i) => {
             return <BurgerIngredient key={ingType + i} type={ingType} />; // key={salad1}
         });
-    });
+    }).reduce((prev , curr) => prev.concat(curr)); //flatten the array ex. [{salad, salad}, {meat}, {cheese}] --> [salad, salad, meat, cheese]
+
+    //console.log(transformedIngredients);
 
     return (
         <div className={classes.Burger}>
             <BurgerIngredient type="bread-top" />
-            {transformIngredients}
+            {transformedIngredients.length === 0 ? <p>Start adding some ingredients</p> : transformedIngredients}
             <BurgerIngredient type="bread-bottom" />
         </div>
     );
