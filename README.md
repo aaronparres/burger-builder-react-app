@@ -1,8 +1,13 @@
-# Burger Builder Project from Udemy React Course - (First approach)
+# Burger Builder Project from Udemy React Course
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### `v1.0`
+Basic version of the Burger Builder (local data) without Orders page.
+
 
 ## Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
