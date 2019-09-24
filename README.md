@@ -2,7 +2,7 @@
 
 
 ### `v1.0`
-Basic version of the Burger Builder (local data) without Orders page.
+Basic version of the Burger Builder without Orders page and local data.
 
 
 ## Available Scripts
