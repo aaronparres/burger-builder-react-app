@@ -4,12 +4,13 @@ import PopUp from '../components/UI/PopUp/PopUp';
 
 const withErrorHandler = (WrappedComponent, Axios) => {
     return class extends Component {
-
-        state = {
-            error: null
-        }
-
-        componentDidMount() {
+        constructor(props) {
+            super(props);
+            this.state = {
+                error: null
+            }
+            /* We set this interceptors inside the constructor due to componentWillMount is lecagy 
+            and we need to print the error even if the BurgerBuilder component (the children wrapped) is not rendered yet */
             Axios.interceptors.request.use(req => {
                 this.setState({ error: null });
                 return req;
