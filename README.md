@@ -1,8 +1,12 @@
 # Burger Builder Project from Udemy React Course
 
 
+### `v2.0`
+Basic version of the Burger Builder with Firebase back-end.
+
 ### `v1.0`
 Basic version of the Burger Builder without Orders page and local data.
+
 
 
 ## Available Scripts
