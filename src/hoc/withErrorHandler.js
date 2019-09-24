@@ -11,13 +11,20 @@ const withErrorHandler = (WrappedComponent, Axios) => {
             }
             /* We set this interceptors inside the constructor due to componentWillMount is lecagy 
             and we need to print the error even if the BurgerBuilder component (the children wrapped) is not rendered yet */
-            Axios.interceptors.request.use(req => {
+            this.requestInterceptor = Axios.interceptors.request.use(req => {
                 this.setState({ error: null });
                 return req;
             })
-            Axios.interceptors.response.use(res => res, error => {
+            this.responseInterceptor = Axios.interceptors.response.use(res => res, error => {
                 this.setState({ error: error });
             })
+        }
+
+        componentWillUnmount() {
+            /* We need to clear interceptors if we use withErrorHandler in other components, 
+            due to unused interceptors remaining in memory */
+            Axios.interceptors.request.eject(this.requestInterceptor);
+            Axios.interceptors.response.eject(this.responseInterceptor);
         }
 
         errorConfirmedHandler = () => {
