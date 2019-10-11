@@ -1,6 +1,9 @@
 # Burger Builder Project from Udemy React Course
 
 
+### `v3.0`
+Basic version of the Burger Builder with Routing.
+
 ### `v2.0`
 Basic version of the Burger Builder with Firebase back-end.
 
