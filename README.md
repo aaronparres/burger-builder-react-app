@@ -1,5 +1,7 @@
 # Burger Builder Project from Udemy React Course
 
+### `v4.0`
+Basic version of the Burger Builder with Forms and Form validation.
 
 ### `v3.0`
 Basic version of the Burger Builder with Routing and Orders page.
