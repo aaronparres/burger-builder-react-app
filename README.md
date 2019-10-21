@@ -2,7 +2,7 @@
 
 
 ### `v3.0`
-Basic version of the Burger Builder with Routing.
+Basic version of the Burger Builder with Routing and Orders page.
 
 ### `v2.0`
 Basic version of the Burger Builder with Firebase back-end.
