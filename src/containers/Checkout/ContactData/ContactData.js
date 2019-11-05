@@ -57,7 +57,7 @@ class ContactData extends Component {
                         {value: 'cheapest', displayValue: 'Cheapest'}
                     ]
                 },
-                value: ''
+                value: 'fastest' //default value to avoid empty string ' ' when submitting
             },
         },
         loading: false
