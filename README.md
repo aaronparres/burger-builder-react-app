@@ -1,5 +1,8 @@
 # Burger Builder Project from Udemy React Course
 
+### `v5.0`
+Basic version of the Burger Builder with Redux.
+
 ### `v4.0`
 Basic version of the Burger Builder with Forms and Form validation.
 
