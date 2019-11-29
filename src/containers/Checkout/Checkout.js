@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import Axios from '../../axios-orders';
 
@@ -19,18 +19,22 @@ export class Checkout extends Component {
     }
 
     render() {
-        return (
+        let summary = <Redirect to="/" />
+
+        if(this.props.ings){
+            summary = (
             <div>
                 <CheckoutSummary
                     ingredients={this.props.ings}
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler} />
-                {/* <Route path={this.props.match.path + '/contact-data'} component={ContactData} /> */}
                 <Route
                     path={this.props.match.path + '/contact-data'}
                     component={ContactData} />
-            </div>
-        );
+            </div>);
+        }
+
+        return summary;
     }
 }
 
