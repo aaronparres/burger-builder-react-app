@@ -1,7 +1,7 @@
 # Burger Builder Project from Udemy React Course
 
 ### `v6.0`
-Basic version of the Burger Builder with Authentification.
+Basic version of the Burger Builder with Authentication.
 
 ### `v5.0`
 Basic version of the Burger Builder with Redux.
