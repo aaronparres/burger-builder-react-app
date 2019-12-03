@@ -77,6 +77,11 @@ class Auth extends Component {
     this.setState({ controls: updatedControls });
   }
 
+  submitHandler = (event) => {
+    event.preventDefault();
+    this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
+  }
+
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
@@ -101,9 +106,9 @@ class Auth extends Component {
 
     return (
       <div className={classes.Auth}>
-        <form>
+        <form onSubmit={this.submitHandler}>
           {inputs}
-          <Button btnType="Success">LOGIN</Button>
+          <Button btnType="Success">SIGN UP</Button>
         </form>
       </div>
     );
