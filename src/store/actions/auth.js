@@ -4,6 +4,8 @@ import * as actionTypes from './actionTypes';
 import { API_KEY } from '../../apikey';
 
 export const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expirationDate');
     return {
         type: actionTypes.AUTH_LOGOUT
     }
@@ -53,6 +55,9 @@ export const auth = (email, password, isSignUp) => {
         Axios.post(url, authData)
             .then(response => {
                 console.log(response);
+                const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000); //expiresIn is in seconds, we have to convert it to 'ms'
+                localStorage.setItem('token', response.data.idToken);
+                localStorage.setItem('expirationDate', expirationDate);
                 dispatch(authSuccess(response.data.idToken, response.data.localId));
                 dispatch(checkAuthTimeout(response.data.expiresIn));
             })
