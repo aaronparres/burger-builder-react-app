@@ -6,7 +6,7 @@ import { API_KEY } from '../../apikey';
 export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
-    localStorage.setItem('userId');
+    localStorage.removeItem('userId');
     return {
         type: actionTypes.AUTH_LOGOUT
     }
@@ -84,10 +84,12 @@ export const authCheckState = () => {
             dispatch(logout());
         } else {
             const expirationDate = new Date(localStorage.getItem('expirationDate'));
-            if (expirationDate > new Date()) {
-                dispatch(authSuccess(token, ));
-            } else {
+            if (expirationDate <= new Date()) {
                 dispatch(logout());
+            } else {
+                const userId = localStorage.getItem('userId');
+                dispatch(authSuccess(token, userId));
+                dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000)); // getTimes returns 'ms' and we have to convert it to seconds
             }
         }
     }
