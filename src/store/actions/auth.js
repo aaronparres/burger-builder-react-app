@@ -55,7 +55,6 @@ export const auth = (email, password, isSignUp) => {
         }
         Axios.post(url, authData)
             .then(response => {
-                console.log(response);
                 const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000); //expiresIn is in seconds, we have to convert it to 'ms'
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('expirationDate', expirationDate);
@@ -64,7 +63,6 @@ export const auth = (email, password, isSignUp) => {
                 dispatch(checkAuthTimeout(response.data.expiresIn));
             })
             .catch(error => {
-                // console.log(error.response);
                 dispatch(authFail(error.response.data.error));
             })
     }

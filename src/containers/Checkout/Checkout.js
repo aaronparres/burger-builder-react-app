@@ -9,12 +9,10 @@ import ContactData from './ContactData/ContactData';
 export class Checkout extends Component {
 
     checkoutCancelledHandler = () => {
-        console.log('canceling')
         this.props.history.goBack();
     }
 
     checkoutContinuedHandler = () => {
-        console.log('continuing')
         this.props.history.replace('/checkout/contact-data');
     }
 

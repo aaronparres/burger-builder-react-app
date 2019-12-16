@@ -52,7 +52,6 @@ class BurgerBuilder extends Component {
         for (let ing in disabledInfo) {
             disabledInfo[ing] = disabledInfo[ing] <= 0 // true or false
         }
-        //console.log(disabledInfo);
 
         let orderSummary = null;
         let burger = this.props.error ? <p>We ran out of ingredients, sorry <Emoji symbol="😭" label="cry" /></p> : <Spinner />;
