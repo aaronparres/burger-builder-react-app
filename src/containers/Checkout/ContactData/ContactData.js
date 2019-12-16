@@ -7,6 +7,9 @@ import classes from './ContactData.module.css';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import withErrorHandler from '../../../hoc/withErrorHandler';
+import { updateObject } from '../../../shared/utility';
+import { checkValidity } from '../../../shared/validation';
+
 import * as actions from '../../../store/actions/index';
 
 class ContactData extends Component {
@@ -113,39 +116,25 @@ class ContactData extends Component {
         this.props.onOrderBurger(order, this.props.token);
     }
 
-    checkValidity(value, rules) {
-        let isValid = true;
-        if (!rules) return true;
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-
-        return isValid;
-    }
-
     inputChangedHandler = (event, inputIdentifier) => {
-        const updatedOrderForm = { ...this.state.orderForm };
-        const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
-        /* To deep clone the inner Object (name or street or etc. depends on the indetifier) 
-        inside the orderForm object which was cloned from the state */
-        updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
-        updatedFormElement.touched = true;
-        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        
+        const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
+            value: event.target.value,
+            valid: checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
+            touched: true
+        });
+        const updatedOrderForm = updateObject(this.state.orderForm, {
+            [inputIdentifier]: updatedFormElement
+        });
+        
+        // const updatedOrderForm = { ...this.state.orderForm };
+        // const updatedFormElement = { ...updatedOrderForm[inputIdentifier] };
+        // /* To deep clone the inner Object (name or street or etc. depends on the indetifier) 
+        // inside the orderForm object which was cloned from the state */
+        // updatedFormElement.value = event.target.value;
+        // updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        // updatedFormElement.touched = true;
+        // updatedOrderForm[inputIdentifier] = updatedFormElement;
 
         let formIsValid = true; // Complete form validation to enable Order button
         for (let inputIdentifier in updatedOrderForm) {
