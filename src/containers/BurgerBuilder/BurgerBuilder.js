@@ -30,7 +30,12 @@ class BurgerBuilder extends Component {
     }
 
     orderNowHandler = () => {
-        this.setState({ purchasing: true });
+        if (this.props.isAuthenticated) {
+            this.setState({ purchasing: true });
+        } else {
+            this.props.onSetAuthRedirectPath('/checkout');
+            this.props.history.push('/login');
+        }
     }
 
     purchaseCancelHandler = () => {
@@ -47,7 +52,6 @@ class BurgerBuilder extends Component {
         for (let ing in disabledInfo) {
             disabledInfo[ing] = disabledInfo[ing] <= 0 // true or false
         }
-        //console.log(disabledInfo);
 
         let orderSummary = null;
         let burger = this.props.error ? <p>We ran out of ingredients, sorry <Emoji symbol="😭" label="cry" /></p> : <Spinner />;
@@ -57,6 +61,7 @@ class BurgerBuilder extends Component {
                 <Fragment>
                     <Burger ingredients={this.props.ings} />
                     <BuildControls
+                        isAuth={this.props.isAuthenticated}
                         add={this.props.onIngredientAdded}
                         remove={this.props.onIngredientRemoved}
                         disabled={disabledInfo}
@@ -90,7 +95,8 @@ const mapStateToProps = state => {
     return {
         ings: state.burgerBuilder.ingredients,
         prc: state.burgerBuilder.totalPrice,
-        error: state.burgerBuilder.error
+        error: state.burgerBuilder.error,
+        isAuthenticated: state.auth.token !== null
     }
 }
 
@@ -99,7 +105,8 @@ const mapDispatchToProps = dispatch => {
         onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
         onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
         onInitIngredients: () => dispatch(actions.initIngredients()),
-        onPurchaseInit: () => dispatch(actions.purchaseInit())
+        onPurchaseInit: () => dispatch(actions.purchaseInit()),
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
     }
 }
 

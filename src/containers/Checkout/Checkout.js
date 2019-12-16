@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import Axios from '../../axios-orders';
 
@@ -9,12 +9,10 @@ import ContactData from './ContactData/ContactData';
 export class Checkout extends Component {
 
     checkoutCancelledHandler = () => {
-        console.log('canceling')
         this.props.history.goBack();
     }
 
     checkoutContinuedHandler = () => {
-        console.log('continuing')
         this.props.history.replace('/checkout/contact-data');
     }
 
@@ -46,4 +44,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Checkout);
+export default withRouter(connect(mapStateToProps)(Checkout));
